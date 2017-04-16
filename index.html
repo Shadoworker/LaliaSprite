@@ -1,0 +1,572 @@
+
+<!DOCTYPE html><html lang="en" class="wf-sourcesanspro-n2-inactive wf-sourcesanspro-n3-inactive wf-sourcesanspro-n4-inactive wf-sourcesanspro-n6-inactive wf-sourcesanspro-n7-inactive wf-sourcesanspro-n9-inactive wf-inactive">
+<head>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LALIA SPRITE </title>
+      <meta name="description" content="xpressing - Java based pressing web app.">
+      
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="theme-color" content="#f7c824">
+      
+
+      <link rel="stylesheet" type="text/css" href="base.css">
+</head>
+<body>
+ <style type="text/css">
+   
+   .maincanvas
+   {
+    border: solid 0.5px #000;
+    height: 500px;
+   }
+
+  .sprite
+  {
+    border-right: solid 0.5px gray;
+    height: 500px;
+  }
+  .spritebox
+  {
+    margin-top: 5%;
+    border: solid 0.5px gray;
+    height: 200px;
+    width: 750px;
+    overflow-x: scroll;
+    /*overflow-y: hidden;*/
+
+  }
+  .small-img
+  { 
+    margin-left: 0;
+    max-height: 200px;
+  }
+  input,select
+  {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .row li {
+    
+    float: left;
+  }
+  li
+  {
+   /* margin-right: 0.5px;
+    margin-left: 0.5px;*/
+  }
+  ul
+  {
+    /*min-width: 900%;*/
+    width: 0px;
+    height: 200px;
+    list-style: none;
+  }
+  
+  img {
+    border: 0 none;
+    display: inline-block;
+    height: 200px;
+    /*max-width: 100%;*/
+    vertical-align: middle;
+  }
+  /*#hiddenImg{display: none;}*/
+
+ </style>
+
+  
+
+<div class="banner">
+  <div class="container">
+    <div class="header clear pad-top-10 pad-bottom-20" style="">
+      <a class="logo left" href="#"><img src="img/logomin.png"></a>
+    </div>
+ 
+
+ 
+  </div>
+</div>
+
+
+<div class="features-block">
+
+  <div class="container pad-top-20 pad-bottom-20 pad-top-20-m pad-bottom-20-m">
+    <div class="pad-top-20-m pad-bottom-20-m clear">
+                 
+          <div class="col-12-m maincanvas" >
+             <div class="col-10-m sprite">
+             
+             <form id="formimg" name="formimg">
+               <input type="file" name="file" id="file">
+             </form><br>
+             <button id="add">add</button>
+             <button id="box">new box</button>
+
+             <br><span style=" ">spriteSheet</span>
+
+              <div class="row" style="border: solid;width: 600px;overflow-x: scroll;">
+
+                <div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center" style="width: 400px;margin-left: 0px;margin-right: 0px;">
+                  <ul id="my-node" style="margin-left: 0px; position: relative;">
+ 
+
+                  </ul>
+                </div>
+              </div>
+                 <button id="gen" style="margin-top: 10px;"> GENERATE </button>
+
+             </div>
+             <div class="col-2-m properties" style="text-align: center;">
+                <form id="form">
+                 
+                  <!-- <span style=" ">sprite</span>
+
+                  <input type="text" disabled="" name="idsprite">
+                  <input type="number" disabled="" name="xsprite">
+                  <input type="number" disabled="" name="ysprite">
+                  <input type="number" style="float: left; width: 48% ; margin-right: 4%;" min="5" name="widthsprite">
+                  <input type="number" style="float: left;width: 48%;" min="5" name="heightsprite"> 
+ -->
+                  <span style=" ">hitbox</span>
+
+                  <input type="text" disabled="" name="id">
+                  <input type="number" disabled="" name="x">
+                  <input type="number" disabled="" name="y">
+                  <input type="number"  min="5" name="width">
+                  <input type="number"  min="5" name="height"> 
+                  <select name="type">
+                    <option value="action">action</option>
+                    <option value="hit">hit</option>
+                    <option value="both">both</option>
+                  </select>
+                </form>
+             </div>
+          </div>
+    </div>
+  </div>
+</div>
+ 
+<br><span style=" ">output</span>
+
+
+<div id="output" style="margin-top: 80px;">
+  
+</div>
+
+
+<script type="text/javascript" src="js/svg.js"></script>
+<script type="text/javascript" src="js/svgdrag.js"></script>
+<script type="text/javascript" src="js/domtoimg.js"></script>
+
+<script type="text/javascript">
+        
+    File.prototype.convertToBase64 = function(callback){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                 callback(e.target.result)
+            };
+            reader.onerror = function(e) {
+                 callback(null, e);
+            };        
+            reader.readAsDataURL(this);
+    };
+
+   
+
+       var file = document.getElementById('file');
+       var el = document.getElementById('el');
+       var addbox = document.getElementById('box');
+     
+   
+       var indexer = -1;
+       var ul = document.getElementsByTagName('ul')[0];
+       var wT = 0;
+       var hT = 0;
+       var _URL = window.URL || window.webkitURL;
+
+        file.addEventListener("change" , function(e) {
+            
+            var image, file;
+
+            if ((file = this.files[0])) {
+               
+                image = new Image();
+                
+                image.onload = function() {
+                    
+                    wT = this.width;
+                    hT = this.height;
+                    
+                };
+            
+                image.src = _URL.createObjectURL(file);
+
+
+            }
+
+        });
+
+      var spriteCont = document.getElementById('my-node');
+      
+       add.addEventListener('click', function()
+        { 
+          indexer++;
+          var li = document.createElement('li');
+          li.setAttribute('id' ,  indexer);
+  
+          ul.appendChild(li);
+           
+            var selectedFile = file.files[0];
+             
+                if (selectedFile) 
+                {
+                 selectedFile.convertToBase64(function(imgurl){
+                 
+                  if (imgurl != "") 
+                   {
+                       
+                    ///////////////SETTING SIZE ////////////////////
+                       
+                      var actualWidth = spriteCont.offsetWidth;
+                      var newWidth = actualWidth + wT ;
+                      
+                      spriteCont.style.width = newWidth+"px";
+
+                    ///////////////////////////////////////////////
+
+                       var draw = SVG(indexer.toString()).size(wT, hT).fill('#f06');
+                       var img = draw.image(imgurl ,'100%', '100%') ;
+ 
+                      file.value = "";
+
+                    }
+                    else
+                    {
+                      console.log("NO FILE SELECTED");
+                    }
+
+
+              });
+             }
+
+        
+        });
+
+
+      addbox.addEventListener('click' , function()
+         {
+
+             for (var i = 0; i < svgs.length; i++)
+              {
+                var editable = svgs[i].getAttribute('editable');
+                var id = svgs[i].getAttribute('id');
+                 if (editable == "true") 
+                  {
+                       var elem = SVG.get(id);
+
+                       var  rect = elem.rect(20, 20)
+                       .x(5)
+                       .y(5)
+                       .opacity(0.4)
+                       .fill('#2E64FE') 
+                       .draggable() 
+                       .attr('type' , 'action');
+                   
+                  }
+              }
+
+
+
+
+           var firstSVG = SVG.get('SvgjsSvg1001');
+           firstSVG.hide();
+           
+
+
+         });
+
+
+
+
+    form.width.addEventListener('input', function()
+        { 
+          var rectP = document.getElementById(form.id.value);
+          rectP.setAttribute('width' , form.width.value);
+       });
+
+    form.height.addEventListener('input', function()
+        { 
+          var rectP = document.getElementById(form.id.value);
+          rectP.setAttribute('height' , form.height.value);
+       });
+    form.type.addEventListener('input', function()
+        { 
+          var rectP = document.getElementById(form.id.value);
+          rectP.setAttribute('type' , form.type.value);
+          //change color 
+         var type = form.type.value;
+
+          if (type == 'hit')
+           { rectP.setAttribute('fill' , '#DF0101');}
+          if (type == 'action')
+           { rectP.setAttribute('fill' , '#2E64FE');}
+          if (type == 'both')
+           { rectP.setAttribute('fill' , '#04B404');}
+
+       });
+    
+  /////////////parse all svg and take each of it's rect/////////
+
+
+     var svgs = document.getElementsByTagName('svg');
+
+
+     window.addEventListener('mousemove' , function(){
+
+
+     var svgs = document.getElementsByTagName('svg');
+   
+     for (var i = 0; i < svgs.length-1; i++) 
+       {
+         // console.log(svgs[i]);
+         var rects = svgs[i].getElementsByTagName('rect');
+
+         for (var j = 0; j < rects.length; j++)
+          {
+            
+             rects[j].addEventListener('mousedown' , function()
+               {
+ 
+                    // console.log(this.getAttribute('width'));
+                    initialFill = this.getAttribute('fill');
+
+                    form.y.value = this.getAttribute('y');
+                    this.setAttribute('fill' , '#008a52');
+                    form.id.value = this.getAttribute('id');
+                    form.x.value = this.getAttribute('x');
+                    form.width.value = this.getAttribute('width');
+                    form.height.value = this.getAttribute('height');  
+                    form.type.value = this.getAttribute('type'); 
+ 
+               });
+
+              rects[j].addEventListener('mouseup' , function()
+               {  
+                var type = this.getAttribute('type');
+                  if (type == 'hit')
+                   { this.setAttribute('fill' , '#DF0101');}
+                  if (type == 'action')
+                   { this.setAttribute('fill' , '#2E64FE');}
+                  if (type == 'both')
+                   { this.setAttribute('fill' , '#04B404');}
+                 
+
+               });
+
+
+          }
+       }
+
+
+    /////////////////  setting editable svg //////
+      for (var i = 0; i < svgs.length-1; i++) 
+       {
+          
+            svgs[i].addEventListener('click' , function(el)
+              {
+                
+                 // window.event.stopPropagation();
+
+                 //       var id = svgs[i].getAttribute('id');
+
+                 //       var currentSvg = SVG.get(id);  
+
+                 //        form.idsprite.value = id;
+                 //        form.xsprite.value = currentSvg.x();
+                 //        form.ysprite.value = currentSvg.y();
+                 //        form.widthsprite.value = currentSvg.width();
+                 //        form.heightsprite.value = currentSvg.height();
+
+                      for (var j = 0; j < svgs.length-1; j++) 
+                       {
+                            svgs[j].setAttribute('editable' , 'false');
+                            svgs[j].parentNode.style.outline = "none" ;
+                            svgs[j].parentNode.style.opacity = 1 ;
+
+
+
+                        }
+
+                      this.setAttribute('editable' , 'true');
+                      this.parentNode.style.opacity = 0.7 ;
+                      this.parentNode.style.outline = "solid 0.5px red" ;
+
+
+              }
+
+
+              );
+ 
+       }
+
+
+
+});
+
+/////////////////////////////////////////////////////////////
+
+
+
+ 
+    var result;
+    function Xhr(url, dataString, handler)  
+    {  
+    
+    // Now debogable !!!!
+
+    var xhr;    
+        xhr = new XMLHttpRequest();  
+     
+
+         var data = dataString;  
+         xhr.open("POST", url, true);     
+         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+         xhr.send(data);  
+         xhr.onreadystatechange = display_data;  
+        
+         function display_data() {  
+           if (xhr.readyState == 4) {  
+            if (xhr.status == 200) {  
+             // result = JSON.parse( xhr.responseText );
+             result =   xhr.responseText;
+               
+              handler(result);
+   
+
+            } 
+          else{}  
+         }  
+        }  
+
+    }
+
+
+
+
+/////////////////////////////////////////////////////////////
+
+var generate = document.getElementById('gen');
+var json = {};
+var sprites = [];
+
+var refX = 0 ;
+
+generate.addEventListener('click' , function()
+   {
+
+      for (var i = 0; i < svgs.length-1; i++) 
+       {
+         // console.log(svgs[i]);
+         
+         //Set to none eventual outline
+
+         svgs[i].parentNode.style.outline = "none" ;
+
+
+         var properties = [];
+
+         var rects = svgs[i].getElementsByTagName('rect');
+
+         for (var j = 0; j < rects.length; j++)
+            {
+               
+               var id = rects[j].getAttribute('id');
+               id = id.replace("SvgjsRect" , "box");
+               var x = rects[j].getAttribute('x');
+               var y = rects[j].getAttribute('y');
+               var w = rects[j].getAttribute('width');
+               var h = rects[j].getAttribute('height');
+               var type = rects[j].getAttribute('type');
+
+               var hit = 
+                {"id": id, "x": x, "y": y, "w": w, "h": h , "type": type };
+
+               properties.push(hit);
+ 
+            }
+
+           var imgSprite = svgs[i].getElementsByTagName('image')[0];
+
+               var id = svgs[i].getAttribute('id');
+               id = id.replace("SvgjsSvg" , "s");
+               var w = svgs[i].getAttribute('width');
+               var h = svgs[i].getAttribute('height'); 
+
+                var x = refX;
+                refX+= parseInt(w,10);
+                
+         
+          var sprite = 
+                {"id": id, "x": x, "y": 0, "w": w, "h": h };
+           
+          sprite.properties = properties ;
+
+          sprites.push(sprite);
+
+
+       }
+        
+        json.sprites = sprites;
+
+
+        var dataString = "title=jsonik&data="+JSON.stringify(json) ;
+
+        Xhr("maker.php" , dataString, function(res)
+           {
+              console.log("received "+res);
+           });
+
+        // console.log(JSON.stringify(json));
+//////////////////////////////////////////////////////////////
+//////////////////// HIDING HITBOXES /////////////////////////
+
+
+        var rects = document.getElementsByTagName('rect');
+
+        
+        for (var i = 0; i < rects.length; i++) {
+          rects[i].setAttribute('visibility' , 'hidden');
+        }
+
+//////////////////////////////////////////////////////////////
+///////////////////  GETTING IMAGE //////////////////////////
+        var node = document.getElementById('my-node');
+
+        domtoimage.toPng(node)
+            .then(function (dataUrl) {
+                var img = new Image();
+                img.src = dataUrl;
+                var output = document.getElementById('output');
+                document.body.appendChild(img);
+            })
+            .catch(function (error) {
+                console.error('oops, something went wrong!', error);
+            });
+
+
+
+
+   });
+
+
+ 
+
+</script>
+ 
+
+</body></html>
+
