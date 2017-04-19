@@ -1064,9 +1064,9 @@ abbr[title]:after{content:" (" attr(title)")"}
 
 .header
 {
-	background-color: #00aa88; color:#f9f9f9; padding: 10px 0px;
+	background-color: #000; color:#f9f9f9; padding: 10px 0px;
 }
-.banner{background-color:#00aa88;color:#f9f9f9;}
+.banner{background-color:#000;color:#f9f9f9;}
 
 .logo{width:100px;height:40px;display:block;-webkit-transition:all .4s;transition:all .4s}
 
