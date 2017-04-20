@@ -20,8 +20,10 @@ with different sprite sizes and define for each sprite the hit areas (or collide
 <h4>Phaser JS</h4>
 <span> In your Phaser game code , load the .json file () and the .png file like this</span>
 <span><em> All the functions below are in usage_phaser.js</em></span>
-<code>
+<pre>
+ <code>
   //In your preload function
+  
   function preload() 
     {
        var mySprite;
@@ -30,9 +32,11 @@ with different sprite sizes and define for each sprite the hit areas (or collide
       ...
     }
 
-</code>
+ </code>
+</pre>
 
-<code>
+<pre>
+ <code>
   //In your preload function
   function create() 
     { 
@@ -48,9 +52,11 @@ with different sprite sizes and define for each sprite the hit areas (or collide
       ....
     }
 
-</code>
+ </code>
+</pre>
 
-<code>
+<pre>
+ <code>
   //In your update function
   function update() 
     {
@@ -68,8 +74,8 @@ with different sprite sizes and define for each sprite the hit areas (or collide
        
     }
 
-</code>
-
+ </code>
+</pre>
 
 
 <h5>You can write your own functions to handle the spritesheet and the hitboxes : Just look at to "usage_phaser.js" functions structure  or the .json file</h5>
