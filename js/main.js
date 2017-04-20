@@ -420,7 +420,18 @@ generate.addEventListener('click' , function()
           rects[i].setAttribute('visibility' , 'hidden');
         }
 
+     var reset = setInterval(function()
+        {
 
+        for (var i = 0; i < rects.length; i++) {
+          rects[i].setAttribute('visibility' , 'visible');
+          if (i == rects.length-1) 
+            {
+              clearInterval(reset);
+            }
+         }
+
+        },1000);
 
 
    });
