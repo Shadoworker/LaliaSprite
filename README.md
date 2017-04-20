@@ -11,5 +11,8 @@ with different sprite sizes and define for each sprite the hit areas (or collide
 <h4>Preview</h4>
 
 <img src="img/preview.png" >
-
+<h2>Getting started</h2>
+<h4>Installation</h4>
+<span>Download the zip , unzip it in your server local directory and access to localhost/laliasprite.</span>
+ 
 
