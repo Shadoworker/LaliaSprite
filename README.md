@@ -19,7 +19,7 @@ with different sprite sizes and define for each sprite the hit areas (or collide
 <h2>Usage</h2>
 <h4>Phaser JS</h4>
 <span> In your Phaser game code , load the .json file () and the .png file like this</span>
-<span><em> All the functions below are in usage_phaser.js</em></span>
+<span><em> All the functions below are in laliasprite.js</em></span>
 <pre>
  <code>
   //In your preload function
@@ -70,7 +70,7 @@ with different sprite sizes and define for each sprite the hit areas (or collide
           //do stuffs
         }
   
-        playaction(mySprite, "ref", "jump", 200, objects, myCallback); 
+        playaction(mySprite, "ref", "jump", 200, "action|hit|both", objects, myCallback); 
        
     }
 
@@ -78,7 +78,7 @@ with different sprite sizes and define for each sprite the hit areas (or collide
 </pre>
 
 
-<h5>You can write your own functions to handle the spritesheet and the hitboxes : Just look at to "usage_phaser.js" functions structure  or the .json file</h5>
+<h5>You can write your own functions to handle the spritesheet and the hitboxes : Just look at to "laliasprite.js" functions structure  or the .json file</h5>
 
 
 
