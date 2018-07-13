@@ -1,0 +1,125 @@
+<doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>tilemap example arcade physics</title>
+        <script src="js/phaser.min.js"></script>
+        <!-- <script src="js/main.js"></script> -->
+        <script src="js/laliasprite.js"></script>
+    </head>
+<body>
+
+    <style type="text/css">
+      
+       body{margin: 0;} 
+       #main
+       {
+        background-color: #ff0000;
+       }
+
+    </style>
+
+    <div id="main">
+      
+    </div>
+
+<script type="text/javascript">
+
+  var player, ground , hitboxes, jogoy /*Jogoy is the fat character's name*/;
+  var collideObjects = []; /*Array of sprites that gonna have collision with our actor jogoy*/
+  
+  function preload() {
+    
+    //Load main player (mario) and (other assets)
+    game.load.spritesheet('mario', 'img/mario-spritesheet.png',50,50);  
+    game.load.image('ground' , 'img/tileset.png');
+    //....
+
+    /*Create jogoy : Associate spritesheet and hitboxes*/
+    var ls = new lsload(game, 'jogoy', 'img/jogoy-spritesheet.png' ,'json/jogoy-hitboxes.json');
+
+   }
+
+  function create() {
+
+    /*Add jogoy to the scene*/
+    jogoy = new lsadd(game, 'jogoy', 250, 200, 0);
+
+  
+    game.physics.startSystem(Phaser.Physics.ARCADE);  
+
+    game.physics.arcade.gravity.y = 1200; // 1200 is a very realistic gravity setting - around 9g
+ 
+    hitter = game.add.sprite(250, 540, 'mario');   //this adds our player to the scene  (xpos, ypos, cachekey)
+     
+    /*collideObjects with which collides the rounded character (jogoy) */
+    collideObjects.push(hitter)
+
+    ground = game.add.sprite(0, 400, 'ground');
+    
+    game.physics.enable(jogoy);
+    
+    hitter.animations.add('walk', [1,2,3,4], 10, false);
+
+    var jogoy_motion = [1,2,3,4];
+
+    setaction(jogoy, "jogoy_motion", jogoy_motion);
+    
+
+    cursors = game.input.keyboard.createCursorKeys();  // we need some cursor keys for our controls
+  
+
+}
+
+
+function myActionCallback()
+{
+
+    console.log('Action triggered : @ALT')
+
+}
+
+function update() {
+ 
+    jogoy.body.collideWorldBounds = true;
+
+    ground.enableBody=true; 
+
+
+ 
+    if (cursors.right.isDown)
+       {
+
+           hitter.animations.play('walk', 60, false);
+          
+           playaction(jogoy, 'jogoy', 'jogoy_motion', 200, 'action', collideObjects, myActionCallback);
+ 
+       }
+
+    
+   }
+
+   //Render func
+   function render()
+    {
+    
+    }
+ 
+
+  var windW = window.innerWidth;
+  var windH = window.innerHeight;
+
+  var mainCanvas = document.getElementById('main');
+
+      mainCanvas.style.width = windW + 'px';
+      mainCanvas.style.height = windH + 'px';
+  
+
+
+  var game = new Phaser.Game(windW, windH, Phaser.CANVAS, 'main',{preload:preload, create:create, update:update, render : render});
+
+   
+
+</script>
+</body>
+</html>
