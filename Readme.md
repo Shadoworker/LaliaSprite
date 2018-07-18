@@ -18,7 +18,9 @@
   - Support sprite scaling
 
 ### Usage
- A. Download and test this example to see interactions.
+ #### A. Download and test this example to see interactions.
+ 
+ #### B. or FOLLOW THESE STEPS
  
  #### STEP 1. Run Locally (server) the project in **/tool** folder
   You can use wamp | xamp | mamp
