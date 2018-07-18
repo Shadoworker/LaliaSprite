@@ -1,3 +1,4 @@
+<img src="img/logo.png" >
 # Laliasprite v 2.0.0 
 - (sprite atlases support)
  
