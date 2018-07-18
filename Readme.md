@@ -3,6 +3,10 @@
  
 * Laliasprite is a PhaserJS based tool-framework that helps you to generate hitboxes for your 2D game characters and setup interactions with them (when animation is playin for example)
 
+<h4>Preview</h4>
+
+<img src="img/preview.png" >
+
   - Phaser JS
   - SVG.JS
   - some Magic
