@@ -1,0 +1,169 @@
+<doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Laliasprite V2.0.0 - Example</title>
+        <script src="js/phaser.js"></script>
+     
+        <script src="dist/laliasprite-2.0.js"></script>
+    </head>
+<body>
+
+    <style type="text/css">
+      
+       body{margin: 0;} 
+       #main
+       {
+        background-color: #ff0000;
+       }
+
+    </style>
+
+    <div id="main">
+      
+    </div>
+
+<script type="text/javascript">
+
+  var ground , hitter, jogoysprite1, jogoysprite2 /*Jogoy is the fat character's name*/;
+  var collideObjects = []; /*Array of sprites that gonna have collision with our actor */
+  
+  
+  function preload() {
+    
+    //Load main player (mario) and (other assets)
+    game.load.spritesheet('mario', 'img/mario-spritesheet.png',50,50);  
+    game.load.image('ground' , 'img/tileset.png');
+ 
+    //Create Lalia instance
+    Lalia = new Lalia();
+    
+    //Load sprite atlases and spritesheet 
+    /*load atlases*/
+    Lalia.atlas(game, "jogoy1", 'img/jogoyatlas.png', 'json/jogoyatlas.json', 'json/atlashitboxes.json' );
+   
+    /*load sheet*/
+    Lalia.sheet(game, "jogoy2", 'img/jogoysheet.png', 'json/sheethitboxes.json', 180, 240);
+    
+    ///ATLAS LINE END///
+
+   
+   }
+
+  function create() {
+
+    /*Start game physics*/
+    game.physics.startSystem(Phaser.Physics.ARCADE);  
+    
+    /*Adding some environment*/
+    ground = game.add.sprite(0, 400, 'ground');
+
+    /*Add jogoy to the scene*/
+    jogoysprite1 = game.add.sprite(game.world.centerX, 30, 'jogoy1');
+    /* jogoysprite1.frame = 1*/
+    /* jogoysprite1.scale.setTo(0.5)*/
+   
+    jogoysprite2 = game.add.sprite(100, 30, 'jogoy2');
+    /* jogoysprite2.frame = 1*/
+    /* jogoysprite2.scale.setTo(0.5)*/
+
+
+    //Creating and adding animation to jogoy characters
+    /*atlas animation : identified by frame name*/
+    jogoysprite1.animations.add("atlasanim1", ["1" ,"2", "3"],1, false);
+    /*sheet animation : identified by frame index*/
+    jogoysprite2.animations.add('sheetanim1', [ 1  , 2 ,  3 ],1, false);
+
+    
+    hitter = game.add.sprite(130, 40, 'mario');   //this adds our player to the scene  (xpos, ypos, cachekey)
+
+    /*collideObjects : Objects which will collide with jogoy characters (jogoysprite1 & jogoysprite2) */
+    collideObjects.push(hitter)
+
+    
+    /*Setting jogoy hitboxes for both atlases and sheet*/;
+    Lalia.atlasboxes(jogoysprite1, 'atlasanim1');
+    Lalia.sheetboxes(jogoysprite2, 'sheetanim1');
+
+
+
+
+
+    cursors = game.input.keyboard.createCursorKeys();  // we need some cursor keys for our controls
+ 
+
+}
+
+/*Action to execute*/
+function myActionCallback1()
+{
+
+    console.log('action 1 triggered : @ALT')
+
+}
+
+function myActionCallback2()
+{
+
+    console.log('action 2 triggered : @ALT')
+
+}
+
+function update() {
+ 
+   
+
+    if (cursors.right.isDown)
+       {
+           
+           /////// PLAY ANIMATION : Perform action on collision with provided objects/////////////////
+
+           jogoysprite1.animations.playaction('atlasanim1','hit', collideObjects, myActionCallback1);
+          
+           //Tips : move hitter character to test collision with other hitboxes
+
+       }
+
+      ///////////////////////////////////////////////////////////////////////////////////////
+
+ 
+    if (cursors.left.isDown)
+       {
+           /////// PLAY ANIMATION : Perform action on collision with provided objects/////////////////
+ 
+           jogoysprite2.animations.playaction('sheetanim1','both', collideObjects, myActionCallback2);
+
+           //Tips : move hitter character to test collision with other hitboxes
+
+       }
+ 
+    
+   }
+
+   //Render func
+   function render()
+    {
+    
+    }
+ 
+
+ //Setting the game environment
+
+  var windW = window.innerWidth;
+  var windH = window.innerHeight;
+
+  var mainCanvas = document.getElementById('main');
+
+      mainCanvas.style.width = windW + 'px';
+      mainCanvas.style.height = windH + 'px';
+  
+
+
+  var game = new Phaser.Game(windW, windH, Phaser.CANVAS, 'main',{preload:preload, create:create, update:update, render : render});
+
+  
+   
+
+</script>
+</body>
+</html>

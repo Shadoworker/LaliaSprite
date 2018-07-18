@@ -1,0 +1,200 @@
+
+<!DOCTYPE html><html lang="en" class="wf-sourcesanspro-n2-inactive wf-sourcesanspro-n3-inactive wf-sourcesanspro-n4-inactive wf-sourcesanspro-n6-inactive wf-sourcesanspro-n7-inactive wf-sourcesanspro-n9-inactive wf-inactive">
+<head>
+
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>LALIA SPRITE </title>
+      <meta name="description" content="xpressing - Java based pressing web app.">
+      
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="theme-color" content="#f7c824">
+      
+
+      <link rel="stylesheet" type="text/css" href="base.css">
+</head>
+<body>
+ <style type="text/css">
+   
+   body
+   {
+    /*font-family: GeosansLight;*/
+   }
+   .maincanvas
+   {
+    border: solid 0.5px #000;
+    height: 500px;
+   }
+
+  .sprite
+  {
+    border-right: solid 0.5px gray;
+    height: 500px;
+  }
+  .spritebox
+  {
+    margin-top: 5%;
+    border: solid 0.5px gray;
+    height: 200px;
+    width: 750px;
+    overflow-x: scroll;
+    /*overflow-y: hidden;*/
+
+  }
+  .small-img
+  { 
+    margin-left: 0;
+    max-height: 200px;
+  }
+  input,select
+  {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .row li {
+    
+    float: left;
+  }
+  li
+  {
+   /* margin-right: 0.5px;
+    margin-left: 0.5px;*/
+  }
+  ul
+  {
+    /*min-width: 900%;*/
+    width: 0px;
+    height: 200px;
+    list-style: none;
+  }
+  
+  img {
+    border: 0 none;
+    display: inline-block;
+    height: 200px;
+    /*max-width: 100%;*/
+    vertical-align: middle;
+  }
+  /*#hiddenImg{display: none;}*/
+  button
+  {
+    padding: 6px 30px;
+    background-color: #00aa88;
+    color: #f9f9f9;
+    border: none;
+  }
+  input[type="file"]
+   {
+    display: none;
+   }
+   label
+   {
+    padding: 10px 38px;
+    background-color: #00aa88;
+    color: #f9f9f9;
+    width: 225px;
+    border: none;
+    cursor: pointer;
+   }
+  .title
+  {
+    width: 200px;
+    margin-bottom: 5px;
+  }
+ </style>
+
+  
+
+<div class="banner">
+  <div class="container">
+    <div class="header clear pad-top-10 pad-bottom-20" style="">
+      <a class="logo left" href="#"><img src="img/logo.png" style="width: 100px; height: auto;"></a>
+    </div>
+ 
+
+ 
+  </div>
+</div>
+
+
+<div class="features-block">
+
+  <div class="container pad-top-20 pad-bottom-20 pad-top-20-m pad-bottom-20-m">
+    <div class="pad-top-20-m pad-bottom-20-m clear">
+      
+       <span>TITLE </span> <input type="text" name="title" id="title" class="title" placeholder="set the title...">
+                 
+          <div class="col-12-m maincanvas" >
+             <div class="col-10-m sprite">
+            
+             <form id="formimg" name="formimg" style="margin-top: 20px;">
+               <input type="file" name="file" id="file">
+               <label for="file">new sprite &#x21e3;</label>
+             </form><br>
+             <button id="add">add &#x2b;</button>
+             <button id="box">new box &#x2680;</button>
+
+             <br><span style=" ">spriteSheet</span>
+
+              <div class="row" style="border: none;width: 600px;overflow-x: scroll;margin-left: 5px;">
+
+                <div id="small-img" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center" style="width: 400px;margin-left: 0px;margin-right: 0px;">
+                  <ul id="my-node" style="margin-left: 0px; position: relative;">
+ 
+
+                  </ul>
+                </div>
+              </div>
+                 <button id="gen" style="margin-top: 10px;"> GENERATE </button>
+
+             </div>
+             <div class="col-2-m properties" style="text-align: center;">
+                <form id="form">
+                 
+                  <!-- <span style=" ">sprite</span>
+
+                  <input type="text" disabled="" name="idsprite">
+                  <input type="number" disabled="" name="xsprite">
+                  <input type="number" disabled="" name="ysprite">
+                  <input type="number" style="float: left; width: 48% ; margin-right: 4%;" min="5" name="widthsprite">
+                  <input type="number" style="float: left;width: 48%;" min="5" name="heightsprite"> 
+ -->
+                  <span style=" ">hitbox</span>
+
+                  <input type="text" disabled="" name="id">
+                  <input type="number" disabled="" name="x">
+                  <input type="number" disabled="" name="y">
+                  <input type="number"  min="5" name="width">
+                  <input type="number"  min="5" name="height"> 
+                  <select name="type">
+                    <option value="action">action</option>
+                    <option value="hit">hit</option>
+                    <option value="both">both</option>
+                  </select>
+                </form>
+             </div>
+          </div>
+    </div>
+  </div>
+</div>
+ 
+<br><span style=" ">output</span>
+
+
+<div id="output" style="margin-top: 80px;">
+  
+</div>
+
+
+<script type="text/javascript" src="js/svg.js"></script>
+<script type="text/javascript" src="js/svgdrag.js"></script>
+<script type="text/javascript" src="js/domtoimg.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+ 
+ 
+
+</body></html>
+
