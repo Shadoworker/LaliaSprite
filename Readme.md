@@ -18,12 +18,14 @@
   - Support sprite scaling
 
 ### Usage
-
- #### 1 . Run Locally (server) the project in **/tool** folder
+ A. Download and test this example to see interactions.
+ 
+ #### STEP 1. Run Locally (server) the project in **/tool** folder
   You can use wamp | xamp | mamp
-  Two files are generated : **yoursprite.png** (in /img folder) and **yoursprite.json** (in /json folder)
   
- #### 2 . Create your new PhaserJS game project
+  .Two files are generated : **yoursprite.png** (in /img folder) and **yoursprite.json** (in /json folder)
+  
+ #### STEP 2 . Create your new PhaserJS game project
  a. Write this in your **index.html**
  
 ```sh
@@ -32,6 +34,8 @@
     <script src="js/phaser.js"></script>
     /*Load laliasprite.js*/
     <script src="js/laliasprite-2.0.js"></script>
+    
+    //NB : in laliasprite.js ,comment "box.alpha = 0;" to see hitboxes
  
 ```
  b. In your **preload** function , do this
