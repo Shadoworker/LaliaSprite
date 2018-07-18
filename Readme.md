@@ -2,7 +2,7 @@
 # Laliasprite v 2.0.0 
 - (sprite atlases support)
  
-* Laliasprite is a PhaserJS based tool-framework that helps you to generate hitboxes for your 2D game characters and setup interactions with them (when animation is playin for example)
+* Laliasprite is a PhaserJS based tool-framework that helps you to generate hitboxes for your 2D game characters and setup interactions with them (when animation is playing for example)
 
 <h4>Preview</h4>
 
