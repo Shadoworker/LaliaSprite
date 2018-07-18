@@ -23,7 +23,7 @@
  #### STEP 1. Run Locally (server) the project in **/tool** folder
   You can use wamp | xamp | mamp
   
-  .Two files are generated : **yoursprite.png** (in /img folder) and **yoursprite.json** (in /json folder)
+  .Two files are generated : **yoursprite.png** (in /sprites folder) and **yoursprite.json** (in /json folder)
   
  #### STEP 2 . Create your new PhaserJS game project
  a. Write this in your **index.html**
