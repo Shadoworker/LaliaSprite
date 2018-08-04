@@ -76,6 +76,7 @@
     ...
     //Set objects which will collide with our character (jogoysprite) hitboxes 
     jogoyColliders.push(hitter);
+    //jogoyColliders is the array you will declare in your code to store colliders
     ...
      
   
@@ -99,6 +100,9 @@
 ```sh
    //On button taped or keyboard event
     jogoysprite.animations.playaction('idle','hit', jogoyColliders, die);
+   
+   //This means: When jogoysprite is playing 'idle' animation, when it's hitboxes having the type 'hit' are touched
+   //by one of the objects in jogoyColliders array then call the 'die' function to execute a specific action (To die in this example)
    ...
   
     
